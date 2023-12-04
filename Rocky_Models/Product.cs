@@ -20,7 +20,6 @@ namespace Rocky_Models
         public string Description { get; set; }
         [Range(1,int.MaxValue)]
         public double Price { get; set; }
-        public int TempSqFt { get; set; }
         public string Image { get; set; }
         [Display(Name ="Category Type")]
         public int CategoryId { get; set; }
@@ -32,6 +31,7 @@ namespace Rocky_Models
         public virtual ApplicationType ApplicationType { get; set; }
         [NotMapped]
         [Range(1,1000)]
+        public int TempSqFt { get; set; }
 
     }
 }
