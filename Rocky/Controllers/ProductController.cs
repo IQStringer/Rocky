@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Rocky_DataAccess;
 using Rocky_DataAccess.Repository.IRepository;
 using Rocky_Models;
@@ -16,14 +17,18 @@ using System.Linq;
 
 namespace Rocky.Controllers
 {
-    [Authorize(Roles = (WC.AdminRole))]
+    [Authorize(Roles = (WC.AdminRole))] 
+    
     public class ProductController : Controller
     {
+        //Логер
+        private readonly ILogger<ProductController> _logger;
         private readonly IProductRepository _prodRepo;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public ProductController(IProductRepository prodRepo, IWebHostEnvironment webHostEnvironment)
+        public ProductController(IProductRepository prodRepo, IWebHostEnvironment webHostEnvironment, ILogger<ProductController> logger)
         {
             _prodRepo = prodRepo;
+            _logger = logger;
             _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
@@ -45,7 +50,8 @@ namespace Rocky.Controllers
             {
                 Product = new Product(),
                 CategorySelectedList = _prodRepo.GetAllDropdownList(WC.CategoryName),
-                ApplicationTypeSelectList = _prodRepo.GetAllDropdownList(WC.ApplicationTypeName)
+                ApplicationTypeSelectList = _prodRepo.GetAllDropdownList(WC.ApplicationTypeName),
+                WarehouseSelectList = _prodRepo.GetAllDropdownList(WC.WarehouseName),
 
             };
             if (id==null)
@@ -68,6 +74,8 @@ namespace Rocky.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(ProductVM productVM)
         {
+            var a=  new Rocky_Models.ViewModels.ProductVM();
+            _logger.LogInformation("Upsert called with ProductVM: {@ProductVM}", productVM);
             if (ModelState.IsValid)
             {
                 var files = HttpContext.Request.Form.Files;
@@ -120,6 +128,8 @@ namespace Rocky.Controllers
             }
             productVM.CategorySelectedList = _prodRepo.GetAllDropdownList(WC.CategoryName);
             productVM.ApplicationTypeSelectList = _prodRepo.GetAllDropdownList(WC.ApplicationTypeName);
+            productVM.WarehouseSelectList = _prodRepo.GetAllDropdownList(WC.WarehouseName);
+
             return View(productVM);
             
         }

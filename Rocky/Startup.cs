@@ -55,7 +55,7 @@ namespace Rocky
 
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
-            //services.AddScoped<IApplicationTypeRepository, ApplicationTypeRepository>();
+            services.AddScoped<IApplicationTypeRepository, ApplicationTypeRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IInquiryDetailRepository, InquiryDetailRepository>();
             services.AddScoped<IInquiryHeaderRepository, InquiryHeaderRepository>();
@@ -63,6 +63,7 @@ namespace Rocky
             services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
             services.AddScoped<IOrderHeaderRepository, OrderHeaderRepository>();
             services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+            services.AddScoped<IWarehouseRepository, WarehouseRepository>();
 
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();

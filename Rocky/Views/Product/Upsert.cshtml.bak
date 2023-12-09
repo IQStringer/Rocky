@@ -1,5 +1,4 @@
 ﻿@using Rocky_Utility
-@using Rocky_Models
 @model Rocky_Models.ViewModels.ProductVM
 
 @{
@@ -90,7 +89,6 @@
                         <span asp-validation-for="Product.ApplicationTypeId" class="text-danger"></span>
                     </div>
                 </div>
-                @* Список загрузки *@
                 <div class="form-group row">
                     <div class="col-4">
                         <label asp-for="Product.LoadingWarehouseId"></label>
@@ -102,7 +100,6 @@
                         <span asp-validation-for="Product.LoadingWarehouseId" class="text-danger"></span>
                     </div>
                 </div>
-                 @* Список разгрузки *@
                 <div class="form-group row">
                     <div class="col-4">
                         <label asp-for="Product.UnloadingWarehouseId"></label>
@@ -126,7 +123,7 @@
                             else    
                             {
                                 //create
-                                <input type="submit" @* onclick="return validateInput()" *@ class="btn btn-info w-100" value="Create" />
+                                <input type="submit" onclick="return validateInput()" class="btn btn-info w-100" value="Create" />
                             }
                             
                         </div>
@@ -148,7 +145,7 @@
     </div>
 </form>
 
-@* @section Scripts{
+@section Scripts{
 
     @{
         <partial name="_ValidationScriptsPartial" />
@@ -171,4 +168,4 @@
             return true;
         }
     </script>
-} *@
+}

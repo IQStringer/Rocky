@@ -36,6 +36,14 @@ namespace Rocky_DataAccess.Repository
                     Value = i.Id.ToString()
                 });
             }
+            if (obj == WC.WarehouseName)
+            {
+                return _db.Warehouse.Select(i => new SelectListItem
+                {
+                    Text = $"{i.Street} {i.ZipCode}",
+                    Value = i.WarehouseId.ToString()
+                });
+            }
             return null;
         }
 

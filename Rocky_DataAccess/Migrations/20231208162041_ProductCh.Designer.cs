@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Rocky_DataAccess;
 
@@ -11,9 +12,10 @@ using Rocky_DataAccess;
 namespace Rocky_DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20231208162041_ProductCh")]
+    partial class ProductCh
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -438,7 +440,7 @@ namespace Rocky_DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LoadingWarehouseId")
+                    b.Property<int?>("LoadingWarehouseId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -452,7 +454,7 @@ namespace Rocky_DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UnloadingWarehouseId")
+                    b.Property<int?>("UnloadingWarehouseId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -639,15 +641,11 @@ namespace Rocky_DataAccess.Migrations
 
                     b.HasOne("Rocky_Models.Warehouse", "LoadingWarehouse")
                         .WithMany()
-                        .HasForeignKey("LoadingWarehouseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LoadingWarehouseId");
 
                     b.HasOne("Rocky_Models.Warehouse", "UnloadingWarehouse")
                         .WithMany()
-                        .HasForeignKey("UnloadingWarehouseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UnloadingWarehouseId");
 
                     b.Navigation("ApplicationType");
 

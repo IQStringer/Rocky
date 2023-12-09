@@ -19,6 +19,7 @@ namespace Rocky_DataAccess
         public DbSet<OrderHeader> OrderHeader { get; set; }
         public DbSet<InquiryDetail> InquiryDetail { get; set; }
         public DbSet<InquiryHeader> InquiryHeader { get; set; }
+        public DbSet<Warehouse> Warehouse { get; set; }
     }
 }
 
