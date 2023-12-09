@@ -21,25 +21,16 @@ namespace Rocky.Controllers
     
     public class ProductController : Controller
     {
-        //Логер
-        private readonly ILogger<ProductController> _logger;
         private readonly IProductRepository _prodRepo;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public ProductController(IProductRepository prodRepo, IWebHostEnvironment webHostEnvironment, ILogger<ProductController> logger)
+        public ProductController(IProductRepository prodRepo, IWebHostEnvironment webHostEnvironment)
         {
             _prodRepo = prodRepo;
-            _logger = logger;
             _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
             IEnumerable<Product> objList = _prodRepo.GetAll(includeProperties: "Category,ApplicationType");
-
-            /*foreach (var item in objList)
-            {
-                item.Category = _dbContext.Category.FirstOrDefault(a => a.Id == item.CategoryId);
-                item.ApplicationType = _dbContext.ApplicationType.FirstOrDefault(a => a.Id == item.ApplicationTypeId);
-            }*/
             return View(objList);
         }
 
@@ -74,9 +65,8 @@ namespace Rocky.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(ProductVM productVM)
         {
-            var a=  new Rocky_Models.ViewModels.ProductVM();
-            _logger.LogInformation("Upsert called with ProductVM: {@ProductVM}", productVM);
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
+            if (true)
             {
                 var files = HttpContext.Request.Form.Files;
                 string webRootPath = _webHostEnvironment.WebRootPath;
