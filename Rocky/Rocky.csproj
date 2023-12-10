@@ -31,4 +31,29 @@
     <ProjectReference Include="..\Rocky_Utility\Rocky_Utility.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Warehouse\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Warehouse\Create.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Warehouse\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Warehouse\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Warehouse\Edit.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Warehouse\Delete.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Warehouse\Edit.cshtml" />
+  </ItemGroup>
+
 </Project>

@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace Rocky_DataAccess.Repository.IRepository
 {
-    public interface IWarehouseRepository
+    public interface IWarehouseRepository: IRepository<Warehouse>
     {
+        void Update(Warehouse obj);
+        /*
         // Получение всех складов
         IEnumerable<Warehouse> GetAll();
 
@@ -19,9 +21,9 @@ namespace Rocky_DataAccess.Repository.IRepository
         void Add(Warehouse warehouse);
 
         // Обновление данных склада
-        void Update(Warehouse warehouse);
+        void Save(Warehouse warehouse);
 
         // Удаление склада
-        void Remove(int id);
+        void Remove(int id);*/
     }
 }

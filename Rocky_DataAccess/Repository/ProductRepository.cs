@@ -41,7 +41,7 @@ namespace Rocky_DataAccess.Repository
                 return _db.Warehouse.Select(i => new SelectListItem
                 {
                     Text = $"{i.Street} {i.ZipCode}",
-                    Value = i.WarehouseId.ToString()
+                    Value = i.Id.ToString()
                 });
             }
             return null;

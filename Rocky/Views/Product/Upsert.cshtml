@@ -125,7 +125,7 @@
                             else    
                             {
                                 //create
-                                <input type="submit" @* onclick="return validateInput()" *@ class="btn btn-info w-100" value="Create" />
+                                <input type="submit" onclick="return validateInput()" class="btn btn-info w-100" value="Create" />
                             }
                             
                         </div>
@@ -147,7 +147,7 @@
     </div>
 </form>
 
-@* @section Scripts{
+@section Scripts{
 
     @{
         <partial name="_ValidationScriptsPartial" />
@@ -170,4 +170,4 @@
             return true;
         }
     </script>
-} *@
+} 
