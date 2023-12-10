@@ -155,8 +155,39 @@
     <script>
         $(document).ready(function () {
             $('.summernote').summernote({
-                height: 250
+                height: 250,
+                callbacks: {
+                    onChange: function (contents, $editable) {
+                        // Синхронизация содержимого Summernote с <textarea>
+                        $(this).html(contents);
+                    }
+                }
             });
+
+            // Перед отправкой формы обновить значение <textarea>
+            $("form").submit(function (e) {
+                $('.summernote').each(function () {
+                    $(this).val($(this).summernote('code'));
+                });
+            });
+        });
+        $("form").submit(function (e) {
+            var isEmpty = true;
+
+            $('.summernote').each(function () {
+                var content = $(this).summernote('code');
+                if (content !== '' && content !== '<p><br></p>') {
+                    isEmpty = false;
+                }
+                $(this).val(content);
+            });
+
+            // Проверка на пустое значение и предотвращение отправки формы
+            if (isEmpty) {
+                e.preventDefault();
+                // Добавьте здесь логику для отображения сообщения об ошибке
+                alert("Description cannot be empty.");
+            }
         });
         function validateInput() {
             if (document.getElementById("uploadBox").value == "") {
