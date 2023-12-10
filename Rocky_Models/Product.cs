@@ -40,7 +40,7 @@ namespace Rocky_Models
         [Display(Name = "Unloading Warehouse")]
         public int UnloadingWarehouseId { get; set; }
 
-        // Навигационные свойства(А эти свойства точно нужны, и без них работает вроде бы)
+        // Навигационные свойства
         [ForeignKey("LoadingWarehouseId")]
         public virtual Warehouse LoadingWarehouse { get; set; }
         [ForeignKey("UnloadingWarehouseId")]

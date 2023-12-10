@@ -30,7 +30,7 @@ namespace Rocky.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Product> objList = _prodRepo.GetAll(includeProperties: "Category,ApplicationType");
+            IEnumerable<Product> objList = _prodRepo.GetAll(includeProperties: "Category,ApplicationType,LoadingWarehouse,UnloadingWarehouse");
             return View(objList);
         }
 
@@ -65,7 +65,8 @@ namespace Rocky.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(ProductVM productVM)
         {
-            //if (ModelState.IsValid)
+            if (ModelState.IsValid) { }
+
             if (true)
             {
                 var files = HttpContext.Request.Form.Files;

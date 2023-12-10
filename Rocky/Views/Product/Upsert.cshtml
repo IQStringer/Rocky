@@ -9,7 +9,7 @@
  @if(Model.Product.Id != 0)
     {
         title = "Edit Product";
-        <input asp-for="Product.Id" hidden /> @* Не понял как работает *@
+        <input asp-for="Product.Id" hidden /> 
     }
 
     <div class="border p-3">
@@ -84,7 +84,7 @@
                     </div>
                     <div class="col-8">
                         <select asp-for="Product.ApplicationTypeId" asp-items="@Model.ApplicationTypeSelectList" class="form-select">
-                            <option disabled selected>--Selected Application Type--</option>
+                            <option disabled selected>--Selected Delivery Type--</option>
                         </select>
                         <span asp-validation-for="Product.ApplicationTypeId" class="text-danger"></span>
                     </div>
@@ -96,7 +96,7 @@
                     </div>
                     <div class="col-8">
                         <select asp-for="Product.LoadingWarehouseId" asp-items="@Model.WarehouseSelectList" class="form-select">
-                            <option disabled selected>--Selected Application Type--</option>
+                            <option disabled selected>--Selected Delivery Type--</option>
                         </select>
                         <span asp-validation-for="Product.LoadingWarehouseId" class="text-danger"></span>
                     </div>
@@ -108,7 +108,7 @@
                     </div>
                     <div class="col-8">
                         <select asp-for="Product.UnloadingWarehouseId" asp-items="@Model.WarehouseSelectList" class="form-select">
-                            <option disabled selected>--Selected Application Type--</option>
+                            <option disabled selected>--Selected Delivery Type--</option>
                         </select>
                         <span asp-validation-for="Product.UnloadingWarehouseId" class="text-danger"></span>
                     </div>
