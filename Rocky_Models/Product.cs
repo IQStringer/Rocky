@@ -19,13 +19,13 @@ namespace Rocky_Models
         public double Price { get; set; }
         public string Image { get; set; }
 
-        [Display(Name = "Category Type")]
+        [Display(Name = "Delivery Type")]
         public int CategoryId { get; set; }
 
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
 
-        [Display(Name = "Application Type")]
+        [Display(Name = "Cargo Type")]
         public int ApplicationTypeId { get; set; }
 
         [ForeignKey("ApplicationTypeId")]

@@ -102,13 +102,13 @@
                                             <input type="hidden" asp-for="@Model.ProductList[i].Id" />
                                             <input type="hidden" asp-for="@Model.ProductList[i].Name" />
                                             <input type="hidden" asp-for="@Model.ProductList[i].Price" />
-                                            <input type="hidden" asp-for="@Model.ProductList[i].TempSqFt" />
+                                            <input type="hidden" asp-for="@Model.ProductList[i].DeliveryTime" />
                                             <li class="list-group-item d-flex justify-content-between">
                                                 <div>
                                                     <h6 class="my-0">@Model.ProductList[i].Name</h6>
                                                     @if (User.IsInRole(Rocky_Utility.WC.AdminRole))
                                                     {
-                                                        <small class="text-muted">Sqft: @Model.ProductList[i].TempSqFt</small>
+                                                        <small class="text-muted">Sqft: @Model.ProductList[i].DeliveryTime</small>
                                                     }
                                                     else
                                                     {
@@ -117,10 +117,10 @@
                                                 </div>
                                                 @if (User.IsInRole(Rocky_Utility.WC.AdminRole))
                                                 {
-                                                    <span class="text-muted">$@(Model.ProductList[i].Price * Model.ProductList[i].TempSqFt)</span>
+                                                    <span class="text-muted">$@(Model.ProductList[i].Price * Model.ProductList[i].DeliveryTime)</span>
                                                 }
                                             </li>
-                                            orderTotal += Model.ProductList[i].Price * Model.ProductList[i].TempSqFt;
+                                            orderTotal += Model.ProductList[i].Price * Model.ProductList[i].DeliveryTime;
                                         }
                                         @if (User.IsInRole(Rocky_Utility.WC.AdminRole))
                                         {

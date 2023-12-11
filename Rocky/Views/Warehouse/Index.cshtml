@@ -19,9 +19,9 @@
         <table class="table table-bordered table-striped" style="width:100%">
             <thead>
                 <tr>
-                    <th>Street</th>
-                    <th>City</th>
                     <th>State</th>
+                    <th>City</th>
+                    <th>Street</th>
                     <th>Number</th>
                     <th>Zip Code</th>
                     <th></th>
@@ -31,9 +31,9 @@
                 @foreach (var obj in Model)
                 {
                     <tr>
-                        <td>@obj.Street</td>
-                        <td>@obj.City</td>
                         <td>@obj.State</td>
+                        <td>@obj.City</td>
+                        <td>@obj.Street</td>
                         <td>@obj.Number</td>
                         <td>@obj.ZipCode</td>
                         <td class="text-center">

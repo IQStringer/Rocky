@@ -53,8 +53,7 @@ namespace Rocky.Controllers
             {
                 ShoppingCart shoppingCart = new ShoppingCart()
                 {
-                    ProductId = detail.ProductId,
-                    SqFt=1
+                    ProductId = detail.ProductId
                 };
                 shoppingCartList.Add(shoppingCart);
             }

@@ -1,135 +1,73 @@
 ﻿@model List<Product>
 @using Rocky_Utility
-@if (Model.Count() > 0)
+@if (Model.Any())
 {
-
-
     <form method="post">
-        <br />
         <div class="backgroundWhiteBorder">
-            <div class="container row">
-                <div class="col -8">
-                    <div class="card mt-4">
-                        <div class="card-header bg-dark text-light ml-0 row container">
-                            <div class="col-6">
-                                <i class="fa fa-shopping-cart"></i> &nbsp;
-                                Shopping Cart
+            <div class="container">
+                <div class="card my-4">
+                    <div class="card-header bg-dark text-light">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <i class="fa fa-shopping-cart"></i> Shopping Cart
                             </div>
-                            <div class="col-6 text-right">
-                                <a asp-action="Clear" class="btn btn-outline-warning btn-sm">Clear Cart</a>
-                                <a asp-action="Index" asp-controller="Home" class="btn btn-outline-info btn-sm">Continue Shopping</a>
+                            <div class="col-md-6 text-right">
+                                <a asp-action="Clear" class="btn btn-warning btn-sm">Clear Cart</a>
+                                <a asp-action="Index" asp-controller="Home" class="btn btn-info btn-sm">Continue Shopping</a>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class=" d-none d-lg-block">
-                                <div class="row" style="color:#821f3d">
-                                    <div class="col-lg-2">
-                                    </div>
-                                    @if (User.IsInRole(WC.AdminRole))
-                                    {
-                                        <div class="col-12 col-lg-3">
-                                            Product Details
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="col-12 col-lg-7">
-                                            Product Details
-                                        </div>
-                                    }
-                                    <div class="col-12 col-lg-2">
-                                        Price per sqft
-                                    </div>
-                                    @if (User.IsInRole(WC.AdminRole))
-                                    {
-                                        <div class="col-6 col-lg-2">
-                                            Sqft
-                                        </div>
-                                        <div class="col-6 col-lg-2">
-                                            Total Price
-                                        </div>
-                                    }
-                                    <div class="col-6 col-sm-4 col-lg-1">
-                                    </div>
+                    </div>
+
+                    <div class="card-body">
+                        <!-- Header Row -->
+                        <div class="row font-weight-bold mb-2">
+                            <div class="col-md-2 text-center">Image</div>
+                            <div class="col-md-4">Product Details</div>
+                            <div class="col-md-3 text-center">Payment</div>
+                            <div class="col-md-3 text-center">Action</div>
+                        </div>
+                        <!-- Products List -->
+                        @{
+                            var orderTotal = 0.0;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            <div class="row mb-2">
+                                <div class="col-md-2 text-center">
+                                    <img src="@WC.ImagePath@item.Image" class="img-fluid rounded" alt="@item.Name" />
+                                </div>
+                                <div class="col-md-4">
+                                    <h5>@item.Name</h5>
+                                    <p>@item.ShortDesc</p>
+                                </div>
+                                <div class="col-md-3 my-auto text-center">
+                                    <span class="price">@item.Price.ToString("c")</span>
+                                </div>
+                                <div class="col-md-3 my-auto text-center">
+                                    <a asp-action="Remove" asp-route-id="@item.Id" class="btn btn-danger">
+                                        <i class="fas fa-trash"></i> Remove
+                                    </a>
                                 </div>
                             </div>
-
                             <hr />
-                            @{
-                                var orderTotal = 0.0;
-                            }
-                            @for (int i = 0; i < Model.Count(); i++)
-                            {
-                                <input hidden asp-for="@Model[i].Id" />
-                                <div class="row h-100">
-                                    <div class="col-4 col-md-2 text-center py-2">
-                                        <img src="@WC.ImagePath@Model[i].Image" class="rounded" width="100%" />
-                                    </div>
-                                    @if (User.IsInRole(WC.AdminRole))
-                                    {
+                            orderTotal += item.Price;
+                        }
 
-                                        <div class="col-8 col-lg-3">
-                                            <h5>@Model[i].Name</h5>
-                                            <div style="font-size:11px;">@Model[i].ShortDesc</div>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="col-8 col-lg-7">
-                                            <h5>@Model[i].Name</h5>
-                                            <div style="font-size:11px;">@Model[i].ShortDesc</div>
-                                        </div>
-                                    }
-                                    <div class="col-3 col-lg-2 pt-lg-4" style="font-size:11px;">
-                                        <span style="font-size:17px;"> $@Model[i].Price</span>/ sqft
+                        <div class="text-right font-weight-bold">
+                            Total Payment: @orderTotal.ToString("c")
+                        </div>
+                    </div>
 
-                                    </div>
-                                    @if (User.IsInRole(WC.AdminRole))
-                                    {
-                                        <div class="col-4 col-lg-2 pt-lg-4" style="font-size:11px;">
-                                            <input type="text" asp-for="@Model[i].TempSqFt" class="form-control" />
-                                            <span asp-validation-for="@Model[i].TempSqFt" class="text-danger"></span>
-                                        </div>
-                                        <div class="col-3 col-lg-2 pt-lg-4" style="font-size:11px;">
-                                            <span style="font-size:17px;"> $@(Model[i].Price * Model[i].TempSqFt)</span>
-
-
-                                        </div>
-                                    }
-                                    <div class="col-2 col-lg-1 p-0 pt-lg-4 text-center">
-                                        <a asp-action="Remove" asp-route-id="@Model[i].Id" class="btn btn-outline-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                orderTotal += Model[i].Price * Model[i].TempSqFt;
-                                <hr />
-                            }
-
+                    <div class="card-footer">
+                        <div class="row">@* 
                             @if (User.IsInRole(WC.AdminRole))
                             {
-                                <div class="row">
-                                    <div class="col-12 text-right pr-4" style="color:#821f3d">
-                                        Order Total : @string.Format("{0:c}", orderTotal)
-                                    </div>
+                                <div class="col-md-4 offset-md-6">
+                                    <input type="submit" asp-action="UpdateCart" value="Update Cart" class="btn btn-info form-control" />
                                 </div>
-                            }
-                        </div>
-                        <div class="card-footer">
-                            <div class="row">
-
-                                <div class="col-6 col-md-3 offset-md-6">
-                                    @if (User.IsInRole(WC.AdminRole))
-                                    {
-                                        <input type="submit" asp-action="UpdateCart" formmethod="post" name="Update" value="Update Cart"
-                                               class="btn btn-info form-control" />
-                                    }
-                                </div>
-                                <div class="col-6 col-md-3">
-                                    <button type="submit" class="btn btn-success form-control ">
-                                        <span>Continue</span>
-                                    </button>
-                                </div>
+                            } *@
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-success form-control">Proceed to Checkout</button>
                             </div>
                         </div>
                     </div>
@@ -140,7 +78,7 @@
 }
 else
 {
-    <p>Please add items to cart.</p>
+    <p class="text-center">Your cart is empty. Please add some items.</p>
 }
 
 @section Scripts {

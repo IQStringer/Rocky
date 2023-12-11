@@ -68,7 +68,6 @@ namespace Rocky.Controllers
             foreach (var cartObj in shoppingCartList)
             {
                 Product prodTemp = prodListTemp.FirstOrDefault(u => u.Id == cartObj.ProductId);
-                prodTemp.TempSqFt = cartObj.SqFt;
                 prodList.Add(prodTemp);
             }
 
@@ -83,7 +82,7 @@ namespace Rocky.Controllers
             List<ShoppingCart> shoppingCartList = new List<ShoppingCart>();
             foreach (Product prod in ProdList)
             {
-                shoppingCartList.Add(new ShoppingCart { ProductId = prod.Id, SqFt = prod.TempSqFt });
+                shoppingCartList.Add(new ShoppingCart { ProductId = prod.Id });
             }
 
             HttpContext.Session.Set(WC.SessionCart, shoppingCartList);
@@ -148,7 +147,6 @@ namespace Rocky.Controllers
             foreach (var cartObj in shoppingCartList)
             {
                 Product prodTemp = _prodRepo.FirstOrDefault(u => u.Id == cartObj.ProductId);
-                prodTemp.TempSqFt = cartObj.SqFt;
                 ProductUserVM.ProductList.Add(prodTemp);
             }
 
@@ -178,7 +176,7 @@ namespace Rocky.Controllers
                 OrderHeader orderHeader = new OrderHeader()
                 {
                     CreatedByUserId = claim.Value,
-                    FinalOrderTotal = ProductUserVM.ProductList.Sum(x => x.TempSqFt * x.Price),
+                    FinalOrderTotal = ProductUserVM.ProductList.Sum(x =>x.Price),
                     City = ProductUserVM.ApplicationUser.City,
                     StreetAddress = ProductUserVM.ApplicationUser.StreetAddress,
                     State = ProductUserVM.ApplicationUser.State,
@@ -199,7 +197,6 @@ namespace Rocky.Controllers
                     {
                         OrderHeaderId = orderHeader.Id,
                         PricePerSqFt = prod.Price,
-                        Sqft = prod.TempSqFt,
                         ProductId = prod.Id
                     };
                     _orderDRepo.Add(orderDetail);
@@ -327,7 +324,7 @@ namespace Rocky.Controllers
             List<ShoppingCart> shoppingCartList = new List<ShoppingCart>();
             foreach (Product prod in ProdList)
             {
-                shoppingCartList.Add(new ShoppingCart { ProductId = prod.Id, SqFt = prod.TempSqFt });
+                shoppingCartList.Add(new ShoppingCart { ProductId = prod.Id});
             }
 
             HttpContext.Session.Set(WC.SessionCart, shoppingCartList);
