@@ -39,7 +39,7 @@ namespace Rocky.Controllers
         {
             ProductVM productVM = new ProductVM()
             {
-                Product = new Product(),
+                Product = new Product() ,
                 CategorySelectedList = _prodRepo.GetAllDropdownList(WC.CategoryName),
                 ApplicationTypeSelectList = _prodRepo.GetAllDropdownList(WC.ApplicationTypeName),
                 WarehouseSelectList = _prodRepo.GetAllDropdownList(WC.WarehouseName),

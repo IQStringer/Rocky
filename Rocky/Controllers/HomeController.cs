@@ -34,7 +34,7 @@ namespace Rocky.Controllers
         {
             HomeVM homeVM = new HomeVM()
             {
-                Products = _prodRepo.GetAll(includeProperties: "Category,ApplicationType"),
+                Products = _prodRepo.GetAll(includeProperties: "Category,ApplicationType,LoadingWarehouse,UnloadingWarehouse"),
                 Categories = _catRepo.GetAll()
             };
             return View(homeVM);

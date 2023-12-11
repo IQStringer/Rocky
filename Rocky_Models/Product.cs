@@ -7,7 +7,7 @@ namespace Rocky_Models
 {
     public class Product
     {
-        public Product() { TempSqFt = 1; }
+        public Product() { DeliveryTime = 1; }
         [Key]
         public int Id { get; set; }
 
@@ -31,9 +31,8 @@ namespace Rocky_Models
         [ForeignKey("ApplicationTypeId")]
         public virtual ApplicationType ApplicationType { get; set; }
 
-        [NotMapped]
-        [Range(1, 1000)]
-        public int TempSqFt { get; set; }
+        [Range(1, 100)]
+        public int DeliveryTime { get; set; }
         // Внешние ключи для связи с Warehouse
         [Display(Name = "Loading Warehouse")]
         public int LoadingWarehouseId { get; set; }
