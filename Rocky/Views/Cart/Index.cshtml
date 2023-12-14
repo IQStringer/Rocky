@@ -30,27 +30,28 @@
                         @{
                             var orderTotal = 0.0;
                         }
-                        @foreach (var item in Model)
+                        @for (int i = 0; i < Model.Count(); i++)
                         {
+                            <input hidden asp-for="@Model[i].Id" />
                             <div class="row mb-2">
                                 <div class="col-md-2 text-center">
-                                    <img src="@WC.ImagePath@item.Image" class="img-fluid rounded" alt="@item.Name" />
+                                    <img src="@WC.ImagePath@Model[i].Image" class="img-fluid rounded" alt="@Model[i].Name" />
                                 </div>
                                 <div class="col-md-4">
-                                    <h5>@item.Name</h5>
-                                    <p>@item.ShortDesc</p>
+                                    <h5>@Model[i].Name</h5>
+                                    <p>@Model[i].ShortDesc</p>
                                 </div>
                                 <div class="col-md-3 my-auto text-center">
-                                    <span class="price">@item.Price.ToString("c")</span>
+                                    <span class="price">@Model[i].Price.ToString("c")</span>
                                 </div>
                                 <div class="col-md-3 my-auto text-center">
-                                    <a asp-action="Remove" asp-route-id="@item.Id" class="btn btn-danger">
+                                    <a asp-action="Remove" asp-route-id="@Model[i].Id" class="btn btn-danger">
                                         <i class="fas fa-trash"></i> Remove
                                     </a>
                                 </div>
                             </div>
                             <hr />
-                            orderTotal += item.Price;
+                            orderTotal += Model[i].Price;
                         }
 
                         <div class="text-right font-weight-bold">
