@@ -180,7 +180,7 @@ namespace Rocky.Controllers
                 OrderHeader orderHeader = new OrderHeader()
                 {
                     CreatedByUserId = claim.Value,
-                    FinalOrderTotal = ProductUserVM.ProductList.Sum(x =>x.Price),
+                    FinalOrderTotal = ProductUserVM.ProductList.Sum(x => x.Price),
                     City = ProductUserVM.ApplicationUser.City,
                     StreetAddress = ProductUserVM.ApplicationUser.StreetAddress,
                     State = ProductUserVM.ApplicationUser.State,
@@ -208,31 +208,31 @@ namespace Rocky.Controllers
                 }
                 _orderDRepo.Save();
 
-                string nonceFromTheClient = collection["payment_method_nonce"];
+                //string nonceFromTheClient = collection["payment_method_nonce"];
 
-                var request = new TransactionRequest
-                {
-                    Amount = Convert.ToDecimal(orderHeader.FinalOrderTotal),
-                    PaymentMethodNonce = nonceFromTheClient,
-                    OrderId = orderHeader.Id.ToString(),
-                    Options = new TransactionOptionsRequest
-                    {
-                        SubmitForSettlement = true
-                    }
-                };
+                //var request = new TransactionRequest
+                //{
+                //    Amount = Convert.ToDecimal(orderHeader.FinalOrderTotal),
+                //    PaymentMethodNonce = nonceFromTheClient,
+                //    OrderId = orderHeader.Id.ToString(),
+                //    Options = new TransactionOptionsRequest
+                //    {
+                //        SubmitForSettlement = true
+                //    }
+                //};
 
-                var gateway = _brain.GetGateway();
-                Result<Transaction> result = gateway.Transaction.Sale(request);
+                //var gateway = _brain.GetGateway();
+                //Result<Transaction> result = gateway.Transaction.Sale(request);
 
-                if (result.Target.ProcessorResponseText == "Approved")
-                {
-                    orderHeader.TransactionId = result.Target.Id;
-                    orderHeader.OrderStatus = WC.StatusApproved;
-                }
-                else
-                {
-                    orderHeader.OrderStatus = WC.StatusCancelled;
-                }
+                //if (result.Target.ProcessorResponseText == "Approved")
+                //{
+                //    orderHeader.TransactionId = result.Target.Id;
+                //    orderHeader.OrderStatus = WC.StatusApproved;
+                //}
+                //else
+                //{
+                //    orderHeader.OrderStatus = WC.StatusCancelled;
+                //}
                 _orderHRepo.Save();
                 return RedirectToAction(nameof(InquiryConfirmation), new { id = orderHeader.Id });
 

@@ -16,7 +16,9 @@ namespace Rocky_Models
         public string Number { get; set; }
         public string ZipCode { get; set; }
         [NotMapped]
-        public string Name{ get { return $"{City}, {Street}, {Number}, {ZipCode}"; } }
+        public string Name{ get { return $"{State}, {City}, {Street}, {Number}, {ZipCode}"; } }
+        [NotMapped]
+        public string FullAdress{ get { return $"{State}, {City}, {Street}, {Number}, {ZipCode}"; } } 
     }
 
 }

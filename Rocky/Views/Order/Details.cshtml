@@ -123,7 +123,7 @@
                             <h4 class="d-flex justify-content-between align-items-center mb-3">
                                 <span class="text-info">Order Summary</span>
                             </h4>
-                            <ul class="list-group mb-3">
+                            <ul class="list-group">
                                 @foreach (var detail in Model.OrderDetail)
                                 {
                                     <li class="list-group-item d-flex justify-content-between p-2">
@@ -154,7 +154,15 @@
 
 
                             <br />
-
+                            @if (Model.OrderHeader.OrderStatus != Rocky_Utility.WC.StatusCancelled)
+                            {
+                                <div class="mb-4">
+                                    <input type="submit" value="Generate a delivery note"
+                                           formmethod="post"  asp-action="CreateNote"
+                                        class="btn btn-info form-control" />
+                            
+                                    </div>
+                            }
                             @if (Model.OrderHeader.OrderStatus == Rocky_Utility.WC.StatusApproved)
                             {
                                 <input type="submit" value="Start Processing"

@@ -37,9 +37,9 @@ namespace Rocky.Controllers
         //Get для Upsert
         public IActionResult Upsert(int? id)
         {
-            ProductVM productVM = new ProductVM()
+            ProductVM productVM = new()
             {
-                Product = new Product() ,
+                Product = new() ,
                 CategorySelectedList = _prodRepo.GetAllDropdownList(WC.CategoryName),
                 ApplicationTypeSelectList = _prodRepo.GetAllDropdownList(WC.ApplicationTypeName),
                 WarehouseSelectList = _prodRepo.GetAllDropdownList(WC.WarehouseName),
@@ -63,6 +63,7 @@ namespace Rocky.Controllers
         //Post для create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        //Не работает валидация на сервере
         public IActionResult Upsert(ProductVM productVM)
         {
             if (ModelState.IsValid) { }
