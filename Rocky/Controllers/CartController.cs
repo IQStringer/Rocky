@@ -54,6 +54,8 @@ namespace Rocky.Controllers
         {
 
             List<ShoppingCart> shoppingCartList = new List<ShoppingCart>();
+            var d = HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WC.SessionCart);
+            var d5 = HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WC.SessionCart).Count();
             if (HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WC.SessionCart) != null
                 && HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WC.SessionCart).Count() > 0)
             {
@@ -77,6 +79,8 @@ namespace Rocky.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Index")]
+
+        //Не передвются значения в IActionResult IndexPost(IEnumerable<Product> ProdList)
         public IActionResult IndexPost(IEnumerable<Product> ProdList)
         {
             List<ShoppingCart> shoppingCartList = new List<ShoppingCart>();

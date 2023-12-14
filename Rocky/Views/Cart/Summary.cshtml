@@ -117,15 +117,15 @@
                                                 </div>
                                                 @if (User.IsInRole(Rocky_Utility.WC.AdminRole))
                                                 {
-                                                    <span class="text-muted">$@(Model.ProductList[i].Price * Model.ProductList[i].DeliveryTime)</span>
+                                                    <span class="text-muted">$@(Model.ProductList[i].Price)</span>
                                                 }
                                             </li>
-                                            orderTotal += Model.ProductList[i].Price * Model.ProductList[i].DeliveryTime;
+                                            orderTotal += Model.ProductList[i].Price;
                                         }
                                         @if (User.IsInRole(Rocky_Utility.WC.AdminRole))
                                         {
                                             <li class="list-group-item d-flex justify-content-between bg-light">
-                                                <small class="text-info"> Total (USD)</small>
+                                                <small class="text-info"> Total (Rub)</small>
                                                 <strong class="text-info">$@orderTotal</strong>
                                             </li>
                                         }
